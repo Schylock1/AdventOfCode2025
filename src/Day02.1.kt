@@ -18,6 +18,9 @@ fun main() {
         }
     }
 
+    val numbers: List<Int> = firsts[0].toString().map { it.digitToInt() }
+
+    println(numbers)
 
     println(ranges)
     println(firsts)
