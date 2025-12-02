@@ -1,12 +1,12 @@
 import java.util.Scanner
 
-val value: Long = 0
+var value: Long = 0
+val ids = mutableListOf<Long>()
 
 fun main() {
     val sc = Scanner(System.`in`)
     val firsts = mutableListOf<Long>()
     val seconds = mutableListOf<Long>()
-    val ranges = mutableListOf<String>()
 
     val line = sc.nextLine()
 
@@ -18,11 +18,29 @@ fun main() {
         }
     }
 
-    val numbers: List<Int> = firsts[0].toString().map { it.digitToInt() }
+    for (i in 0..firsts.size-1){
+        for (j in firsts[i]..seconds[i]){
+            if (ids.contains(j)){
+                continue
+            }
+            checkValid(j)
+            ids.add(j)
+        }
+    }
 
-    println(numbers)
+    println(value)
+}
 
-    println(ranges)
-    println(firsts)
-    println(seconds)
+fun checkValid(id: Long) {
+    val numbers: List<Int> = id.toString().map { it.digitToInt() }
+    var valid = false
+    for (i in 0..numbers.size/2-1){
+        if (numbers[i] != numbers[i + numbers.size/2] || numbers.size%2 == 1){
+            valid = true
+            break
+        }
+    }
+    if (!valid){
+        value += id
+    }
 }
