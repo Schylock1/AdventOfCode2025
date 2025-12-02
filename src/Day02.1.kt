@@ -1,43 +1,41 @@
 import java.util.Scanner
 
-var value: Long = 0
+private var value: Long = 0
 
 fun main() {
     val sc = Scanner(System.`in`)
-    val firsts = mutableListOf<Long>()
-    val seconds = mutableListOf<Long>()
+    val firsts = mutableListOf<String>()
+    val seconds = mutableListOf<String>()
 
     val line = sc.nextLine()
 
     line.split(",", "-").forEachIndexed { i, it ->
         if (i%2 == 0){
-            firsts.add(it.toLong())
+            firsts.add(it)
         } else {
-            seconds.add(it.toLong())
+            seconds.add(it)
         }
     }
 
     for (i in 0..firsts.size-1){
-        println(i)
-        if (firsts[i].toString().length%2 == 1 && seconds[i].toString().length%2 == 1){
+        if (firsts[i].length%2 == 1 && seconds[i].length%2 == 1){
             continue
         }
-        for (j in firsts[i]..seconds[i]){
-            checkValid(j)
+        for (j in firsts[i].toLong()..seconds[i].toLong()){
+            checkValid(j.toString())
         }
     }
 
     println(value)
 }
 
-fun checkValid(id: Long) {
-    val numbers = id.toString()
+fun checkValid(numbers: String) {
     if (numbers.length%2 == 1) return
 
     val firstHalf = numbers.substring(0, numbers.length/2)
     val secondHalf = numbers.substring(numbers.length/2)
 
     if (firstHalf == secondHalf) {
-        value += id
+        value += numbers.toLong()
     }
 }
