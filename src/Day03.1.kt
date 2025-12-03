@@ -12,14 +12,14 @@ fun main(){
 
     var counter = 0
 
-    lines.forEachIndexed { i, it ->
+    lines.forEach {
         var biggest = 0
         var secondBiggest = 0
-        for (j in 0..lines[i].size-2){
-            biggest = Math.max(biggest, lines[i][j])
+        for (j in 0..it.size-2){
+            biggest = Math.max(biggest, it[j])
         }
-        for (j in lines[i].indexOf(biggest)+1..lines[i].size-1){
-            secondBiggest = Math.max(secondBiggest, lines[i][j])
+        for (j in it.indexOf(biggest)+1..it.size-1){
+            secondBiggest = Math.max(secondBiggest, it[j])
         }
         counter += (biggest.toString()+secondBiggest.toString()).toInt()
     }
