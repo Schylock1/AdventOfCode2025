@@ -12,27 +12,16 @@ fun main(){
 
     var counter = 0
 
-    lines.forEach { it ->
+    lines.forEachIndexed { i, it ->
         var biggest = 0
         var secondBiggest = 0
-        it.forEach { number ->
-            if (number >= biggest){
-                secondBiggest = biggest
-                biggest = number
-            } else if (number >= secondBiggest){
-                secondBiggest = number
-            }
+        for (j in 0..lines[i].size-2){
+            biggest = Math.max(biggest, lines[i][j])
         }
-        println("Biggest: $biggest")
-        println("SecondBiggest: $secondBiggest")
-
-        if (it.indexOf(biggest) <= it.indexOf(secondBiggest) ){
-            counter += (biggest.toString()+secondBiggest.toString()).toInt()
-        } else {
-            counter += (secondBiggest.toString()+biggest.toString()).toInt()
+        for (j in lines[i].indexOf(biggest)+1..lines[i].size-1){
+            secondBiggest = Math.max(secondBiggest, lines[i][j])
         }
-
-
+        counter += (biggest.toString()+secondBiggest.toString()).toInt()
     }
     println(counter)
 }
