@@ -10,10 +10,15 @@ fun main(){
     }
     val operator: MutableList<String> = line
 
-    lists.forEach { line ->
-        line.removeAll { it.isEmpty() }
-    }
-    operator.removeAll{ it.isEmpty() }
+//    lists.forEach { line ->
+//        line.removeAll { it.isEmpty() }
+//    }
+//    operator.removeAll{ it.isEmpty() }
+
+    println(lists)
+    println(operator)
+
+    // nach Länge zwischen Operatoren schauen und anhand dessen die Zahlen auffüllen
 
     var counter: Long = 0
 
