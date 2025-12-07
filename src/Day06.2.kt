@@ -2,7 +2,7 @@ import java.util.Scanner
 
 fun main(){
     val sc = Scanner(System.`in`)
-    val lists = mutableListOf<MutableList<String>>()
+    var lists = mutableListOf<MutableList<String>>()
     var line = sc.nextLine().split(' ').toMutableList()
     while (!(line.first().equals("+") || line.first().equals("*"))){
         lists.add(line)
@@ -13,7 +13,6 @@ fun main(){
 //    lists.forEach { line ->
 //        line.removeAll { it.isEmpty() }
 //    }
-//    operator.removeAll{ it.isEmpty() }
     val operatorDistance = mutableListOf<Int>()
 
     var distance = 1
@@ -29,12 +28,34 @@ fun main(){
     println(lists)
     println(operator)
 
-    // nach Länge zwischen Operatoren schauen und anhand dessen die Zahlen auffüllen
+    operator.removeAll{ it.isEmpty() }
+    val shortenedList = mutableListOf<MutableList<String>>()
 
+    println(operator)
 
+    lists.forEachIndexed { lineIndex, list ->
+        shortenedList.add(mutableListOf())
+        var slot = ""
+        var completedOperatorDistance = 0
+        for (i in 0..<list.size){
+            if (list[i].isEmpty()){
+                slot += 0
+                completedOperatorDistance += 1
+            } else { //Zelle hat Inhalt
+                slot += list[i]
+                completedOperatorDistance += list[i].length
+            }
+            if (completedOperatorDistance == operatorDistance[lineIndex]){
+                shortenedList[lineIndex].add(slot)
+                slot = ""
+                completedOperatorDistance = 0
+            }
+        }
+    }
 
-
-
+    println("Shortened list: $shortenedList")
+    lists = shortenedList
+    println()
 
     var counter: Long = 0
 
@@ -47,9 +68,11 @@ fun main(){
                 coloum.add((lists[j][coloumIndex].toLong()))
             }
             var coloumNumber = ""
+            println(coloum)
             coloum.forEach {
                 try {
-                    coloumNumber += it.toString().split("")[3 - k]
+                    val singleNumberInThisColoum = it.toString().split("")[3 - k]
+                    if (singleNumberInThisColoum.isNotEmpty() && singleNumberInThisColoum.toInt() > 0) coloumNumber += singleNumberInThisColoum
                 } catch (_: IndexOutOfBoundsException) {}
             }
             if (coloumNumber.isNotEmpty()) numbersInThisColoum.add(coloumNumber.toLong())
