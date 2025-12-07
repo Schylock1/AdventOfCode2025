@@ -13,16 +13,12 @@ fun main(){
     lines[0].forEachIndexed { i, s -> if (s.equals("S")) lines[0][i] = "|"}
     for (lineIndex in 1..<lines.size){
         lines[lineIndex].forEachIndexed { elementIndex, element ->
-            if (element.equals("^")){
-                if (lines[lineIndex-1][elementIndex].equals("|")) {
-                    lines[lineIndex][elementIndex-1] = "|"
-                    lines[lineIndex][elementIndex+1] = "|"
-                    totalSplits++
-                }
-            } else { // "."
-                if (lines[lineIndex-1][elementIndex].equals("|")) {
-                    lines[lineIndex][elementIndex] = "|"
-                }
+            if (element.equals("^") && lines[lineIndex-1][elementIndex].equals("|")){
+                lines[lineIndex][elementIndex-1] = "|"
+                lines[lineIndex][elementIndex+1] = "|"
+                totalSplits++
+            } else if (element.equals(".") && lines[lineIndex-1][elementIndex].equals("|")) {
+                lines[lineIndex][elementIndex] = "|"
             }
         }
     }
