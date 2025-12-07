@@ -14,11 +14,27 @@ fun main(){
 //        line.removeAll { it.isEmpty() }
 //    }
 //    operator.removeAll{ it.isEmpty() }
+    val operatorDistance = mutableListOf<Int>()
 
+    var distance = 1
+    for(i in 1..<operator.size){
+        if(operator[i].equals("+") || operator[i].equals("*") ){
+            operatorDistance.add(distance)
+            distance = 1
+        } else distance++
+    }
+    operatorDistance.add(distance)
+
+    println("operatorDistance: $operatorDistance")
     println(lists)
     println(operator)
 
     // nach Länge zwischen Operatoren schauen und anhand dessen die Zahlen auffüllen
+
+
+
+
+
 
     var counter: Long = 0
 
