@@ -13,6 +13,7 @@ fun main(){
         list.add(Pair(adding[0].toInt(), adding[1].toInt()))
         line = sc.nextLine()
     }
+    list.sortBy { it.first }
 
     val pairs = mutableListOf<Pair<Pair<Int, Int>, Pair<Int, Int>>>()
     for (i in 0..<list.size){
@@ -36,12 +37,17 @@ fun main(){
 
 fun blocked(list: List<Pair<Int, Int>>, pair: Pair<Pair<Int, Int>, Pair<Int, Int>>): Boolean {
     list.forEach {
-        if (it.first > min(pair.first.first, pair.second.first) &&
-            it.first < max(pair.first.first, pair.second.first) &&
-            it.second > min(pair.first.second, pair.second.second) &&
-            it.second < max(pair.first.second, pair.second.second))
-            //ToDO:
-            return true
+        if (!(it == pair.first || it == pair.second)){
+            // # mittendrin
+            if (it.first > min(pair.first.first, pair.second.first) &&
+                it.first < max(pair.first.first, pair.second.first) &&
+                it.second > min(pair.first.second, pair.second.second) &&
+                it.second < max(pair.first.second, pair.second.second))
+                return true
+
+            // ToDo: Wenn # in einer der Ecken ist
+        }
+
     }
     return false
 }
