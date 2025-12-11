@@ -33,7 +33,41 @@ fun main(){
         lists.add(Triple(firstList, secondList, thirdList))
         line = sc.nextLine()
     }
-    println(lists)
+    var result = 0
+    var count = 0
+
+    lists.forEach { list ->
+        var missedLine = true
+        singleLine@
+        for (i in 1..list.second.size){
+            val combinations = list.second.combinations(i)
+            combinations.forEach { combination ->
+                val boolList = list.first.toMutableList()
+                combination.toList().forEach { toToggleList ->
+                    toToggleList.forEach { toToggle ->
+                        boolList[toToggle] = !boolList[toToggle]
+                    }
+                }
+                var allOff = true
+                boolList.forEach { bool ->
+                    if (bool) {
+                        allOff = false
+                    }
+                }
+                if (allOff) {
+                    result += i
+                    count++
+                    missedLine = false
+//                    println(i)
+                    break@singleLine
+                }
+            }
+        }
+        if (missedLine) println("MissedLine: $list")
+    }
+    println("Count: $count")
+    println("Anzahl lines: ${lists.size}")
+    println("Result: $result")
 }
 
 
