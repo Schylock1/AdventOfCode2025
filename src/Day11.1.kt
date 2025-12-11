@@ -23,7 +23,7 @@ fun makeTree(lines: MutableList<Pair<String, MutableList<String>>>, key: String)
     if (key.equals("out") || key.equals("you")) return Node(key)
     val thisNode = lines[lines.indexOfFirst { it.first == key }]
     val node = Node(thisNode.first)
-    thisNode.second.forEach { if (!node.hasThisParent(it)) node.addChild(makeTree(lines, it)) }
+    thisNode.second.forEach { if (!node.hasThisParentOrSelf(it)) node.addChild(makeTree(lines, it)) }
     return node
 }
 
@@ -43,9 +43,9 @@ data class Node<String>(var value: String) {
         node.parent = this
     }
 
-    fun hasThisParent(key: String): Boolean {
+    fun hasThisParentOrSelf(key: String): Boolean {
+        if (value!!.equals(key)) return true
         if (parent == null) return false
-        if (parent!!.value!!.equals(key)) return true
-        return parent!!.hasThisParent(key)
+        return parent!!.hasThisParentOrSelf(key)
     }
 }
