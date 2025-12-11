@@ -28,7 +28,7 @@ fun makeTree(lines: MutableList<Pair<String, MutableList<String>>>, key: String)
 }
 
 fun findLeafs(key: String, node: Node<String>): Int {
-    if (node.value!!.equals(key)) return 1
+    if (node.value.equals(key)) return 1
     var count = 0
     node.children.forEach { count += (findLeafs(key, it)) }
     return count
