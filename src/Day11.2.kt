@@ -1,8 +1,8 @@
 import java.util.Scanner
 
-//////////////////////////////////////
-// Funktioniert nicht: läuft endlos //
-//////////////////////////////////////
+//////////////////////
+// terminiert nicht //
+//////////////////////
 
 fun main(){
     val sc = Scanner(System.`in`)
@@ -27,7 +27,7 @@ fun makeTree2(lines: MutableList<Pair<String, MutableList<String>>>, key: String
     if (key.equals("svr") || key.equals("out")) return Node(key)
     val thisNode = lines[lines.indexOfFirst { it.first == key }]
     val node = Node(thisNode.first)
-    thisNode.second.forEach { if (!node.hasThisParentOrSelf(it)) node.addChild(makeTree2(lines, it)) }
+    thisNode.second.forEach { node.addChild(makeTree2(lines, it)) }
     return node
 }
 

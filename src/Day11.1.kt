@@ -23,7 +23,7 @@ fun makeTree(lines: MutableList<Pair<String, MutableList<String>>>, key: String)
     if (key.equals("out") || key.equals("you")) return Node(key)
     val thisNode = lines[lines.indexOfFirst { it.first == key }]
     val node = Node(thisNode.first)
-    thisNode.second.forEach { if (!node.hasThisParentOrSelf(it)) node.addChild(makeTree(lines, it)) }
+    thisNode.second.forEach { node.addChild(makeTree(lines, it)) }
     return node
 }
 
