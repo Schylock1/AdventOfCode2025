@@ -2,7 +2,7 @@ import java.util.Scanner
 
 fun main(){
     val sc = Scanner(System.`in`)
-    var lists = mutableListOf<String>()
+    val lists = mutableListOf<String>()
     var line = sc.nextLine()
     while (line.isNotEmpty()){
         lists.add(line)
